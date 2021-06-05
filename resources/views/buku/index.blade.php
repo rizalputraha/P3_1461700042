@@ -36,7 +36,6 @@
                 <td>{{$buku->tahun_terbit}}</td>
                 <td>
                     <form action="{{ route('buku.destroy',$buku->id) }}" method="post">
-                    <a class="btn btn-sm btn-success" href="{{ route('buku.show', $buku->id)}}">Show</a>
                     <a class="btn btn-sm btn-warning" href="{{ route('buku.edit', $buku->id)}}">Edit</a>
                     @csrf
                     @method('DELETE')

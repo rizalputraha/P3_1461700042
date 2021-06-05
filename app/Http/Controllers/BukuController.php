@@ -29,7 +29,9 @@ class BukuController extends Controller
      */
     public function create()
     {
-        //
+        $jenises = DB::table('jenis_buku')->get();
+        $bukus = DB::table('buku')->get();
+        return view('buku.create',compact('jenises','bukus'));
     }
 
     /**
@@ -62,7 +64,10 @@ class BukuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jenises = DB::table('jenis_buku')->get();
+        $bukus = DB::table('buku')->get();
+        $rak = DB::table('rak_buku')->where('id',$id)->first();
+        return view('buku.edit',compact('jenises','bukus','rak'));
     }
 
     /**
