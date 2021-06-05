@@ -45,7 +45,7 @@
             <div class="form-group row">
                 <label for="nimMahasiswa" class="col-sm-2 col-form-label">Jenis Buku</label>
                 <div class="col-sm-10">
-                <select name="judul" id="judul" value='{{$rak->id_jenis_buku}}'>
+                <select name="jenis" id="jenis" value='{{$rak->id_jenis_buku}}'>
                         @foreach($jenises as $jenis)
                             <option value='{{$jenis->id}}'>{{$jenis->jenis}}</option>
                         @endforeach

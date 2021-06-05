@@ -19,7 +19,7 @@ class BukuController extends Controller
                     ->join('buku','rak_buku.id_buku','=','buku.id')
                     ->join('jenis_buku','rak_buku.id_jenis_buku','=','jenis_buku.id')
                     ->get();
-        return view('buku.index',compact('bukus'));
+        return view('buku.index0042',compact('bukus'));
     }
 
     /**
@@ -31,7 +31,7 @@ class BukuController extends Controller
     {
         $jenises = DB::table('jenis_buku')->get();
         $bukus = DB::table('buku')->get();
-        return view('buku.create',compact('jenises','bukus'));
+        return view('buku.create0042',compact('jenises','bukus'));
     }
 
     /**
@@ -42,7 +42,12 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $buku = new Buku();
+        $buku->id_buku = $request->judul;
+        $buku->id_jenis_buku = $request->jenis;
+        $buku->save();
+        return redirect()->route('buku.index')
+                         ->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -67,7 +72,7 @@ class BukuController extends Controller
         $jenises = DB::table('jenis_buku')->get();
         $bukus = DB::table('buku')->get();
         $rak = DB::table('rak_buku')->where('id',$id)->first();
-        return view('buku.edit',compact('jenises','bukus','rak'));
+        return view('buku.edit0042',compact('jenises','bukus','rak'));
     }
 
     /**
@@ -79,7 +84,12 @@ class BukuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $buku = Buku::find($id);
+        $buku->id_buku = $request->judul;
+        $buku->id_jenis_buku = $request->jenis;
+        $buku->save();
+        return redirect()->route('buku.index')
+                         ->with('success', 'Data berhasil diupdate');
     }
 
     /**
@@ -90,6 +100,9 @@ class BukuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mahasiswa = Buku::find($id);
+        $mahasiswa->delete();
+        return redirect()->route('buku.index')
+                         ->with('success', 'Data berhasil dihapus');
     }
 }
